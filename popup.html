@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gospel of John - KJV</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>Gospel of John</h1>
+            <p class="subtitle">King James Version</p>
+        </header>
+
+        <!-- Controls (TOC moved to separate tab) -->
+        <div class="chapter-selector">
+            <button id="open-toc" title="Open table of contents">Contents</button>
+
+            <select id="theme-select" title="Theme" aria-label="Select theme" style="margin-left:8px;padding:6px;border-radius:6px;border:1px solid #cfc6b9;background:white;color:#2c2416">
+            </select>
+
+            <div class="controls">
+                <button id="prev-chap" title="Previous chapter">◀</button>
+                <button id="next-chap" title="Next chapter">▶</button>
+                <button id="font-dec" title="Decrease font">A-</button>
+                <button id="font-inc" title="Increase font">A+</button>
+                
+                <button id="open-full" title="Open full reader">⤢</button>
+            </div>
+        </div>
+
+        <!-- Reader Area -->
+        <main class="reader-area">
+            <div id="bible-text" class="bible-text">
+                <p class="placeholder">Select a chapter to begin reading...</p>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>King James Version (KJV) - Public Domain</p>
+        </footer>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>

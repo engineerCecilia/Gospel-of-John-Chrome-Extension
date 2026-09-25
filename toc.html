@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Table of Contents — Gospel of John (KJV)</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body class="fullpage">
+  <div class="container">
+    <header class="header">
+      <h1>Contents — Gospel of John</h1>
+      <p class="subtitle">King James Version</p>
+    </header>
+
+    <main class="reader-area">
+      <div style="padding:16px">
+        <div class="toc-search">
+          <input id="toc-search" placeholder="Search chapters or text (type and press Enter)" aria-label="Search chapters" />
+        </div>
+      </div>
+
+      <div id="toc-list" style="padding:20px">
+        <p class="placeholder">Loading chapters…</p>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <p>Tap a chapter to open it in the reader.</p>
+    </footer>
+  </div>
+
+  <script>
+    let tocItems = [];
+
+    function renderList(filtered) {
+      const list = document.getElementById('toc-list');
+      list.innerHTML = '';
+      const ul = document.createElement('ul');
+      ul.style.listStyle = 'none';
+      ul.style.padding = '0';
+      (filtered || tocItems).forEach(item => {
+        const li = document.createElement('li');
+        li.style.margin = '8px 0';
+        const a = document.createElement('a');
+        a.href = `reader.html?chapter=${item.idx}`;
+        a.textContent = item.title;
+        a.style.color = '#5c3e2e';
+        a.style.textDecoration = 'none';
+        a.style.fontWeight = '600';
+        a.addEventListener('mouseover', () => a.style.textDecoration = 'underline');
+        a.addEventListener('mouseout', () => a.style.textDecoration = 'none');
+        li.appendChild(a);
+        ul.appendChild(li);
+      });
+      list.appendChild(ul);
+    }
+
+    fetch('John.json')
+      .then(r => r.json())
+      .then(data => {
+        tocItems = data.chapters.map((ch, idx) => ({
+          idx,
+          title: `Chapter ${ch.chapter} — ${ch.verses[0].text.slice(0,80).replace(/\s+$/,'')}...`,
+          text: ch.verses.map(v => v.text).join(' ').toLowerCase()
+        }));
+
+        renderList();
+
+        const search = document.getElementById('toc-search');
+        if (search) {
+          search.addEventListener('input', (e) => {
+            const q = e.target.value.trim().toLowerCase();
+            if (!q) return renderList();
+            const filtered = tocItems.filter(it => (it.title.toLowerCase().includes(q) || it.text.includes(q)));
+            renderList(filtered);
+          });
+
+          // allow Enter to open the first match
+          search.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+              const first = document.querySelector('#toc-list ul li a');
+              if (first) first.click();
+            }
+          });
+        }
+      })
+      .catch(() => {
+        document.getElementById('toc-list').innerHTML = '<p class="placeholder">Failed to load contents.</p>';
+      });
+  </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gospel of John — Reader</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body class="fullpage">
+  <div class="container">
+    <header class="header">
+      <h1>Gospel of John</h1>
+      <p class="subtitle">King James Version — Full Reader</p>
+    </header>
+
+    <div class="chapter-selector">
+      <label for="chapter-dropdown">Select Chapter:</label>
+      <select id="chapter-dropdown">
+        <option value="">-- Choose a chapter --</option>
+      </select>
+      <select id="theme-select" title="Theme" aria-label="Select theme" style="margin-left:12px;padding:6px;border-radius:6px;border:1px solid #cfc6b9;background:white;color:#2c2416">
+      </select>
+      <div class="controls">
+        <button id="prev-chap" title="Previous chapter">◀</button>
+        <button id="next-chap" title="Next chapter">▶</button>
+        <button id="font-dec" title="Decrease font">A-</button>
+        <button id="font-inc" title="Increase font">A+</button>
+        
+      </div>
+    </div>
+
+    <main class="reader-area">
+      <div id="search-results" style="padding:12px 24px; display:none"></div>
+      <div id="bible-text" class="bible-text">
+        <p class="placeholder">Select a chapter to begin reading...</p>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <p>King James Version (KJV) - Public Domain</p>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+  
+</body>
+</html>

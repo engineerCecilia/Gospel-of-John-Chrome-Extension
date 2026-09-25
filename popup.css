@@ -1,0 +1,271 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-color: #faf8f3;
+    --text-color: #2c2416;
+}
+
+body {
+    font-family: 'Georgia', 'Garamond', serif;
+    background: var(--bg-color);
+    color: var(--text-color);
+    min-height: 100vh;
+}
+
+.container {
+    width: 360px;
+    max-width: 100%;
+    height: 640px;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-color);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Header */
+.header {
+    background: linear-gradient(135deg, #8b7355 0%, #6b5344 100%);
+    color: #faf8f3;
+    padding: 25px 20px;
+    text-align: center;
+    border-bottom: 3px solid #5c3e2e;
+}
+
+.header h1 {
+    font-size: 28px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    font-size: 14px;
+    opacity: 0.9;
+    font-style: italic;
+}
+
+/* Chapter Selector */
+.chapter-selector {
+    padding: 15px 20px;
+    background: #f0ede8;
+    border-bottom: 1px solid #d4cfc8;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.chapter-selector label {
+    font-weight: 600;
+    color: #5c3e2e;
+    white-space: nowrap;
+}
+
+.chapter-selector select {
+    flex: 1;
+    padding: 8px 12px;
+    border: 2px solid #8b7355;
+    border-radius: 4px;
+    background: white;
+    color: #2c2416;
+    font-family: 'Georgia', serif;
+    font-size: 14px;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+}
+
+.chapter-selector select:hover {
+    border-color: #6b5344;
+}
+
+.chapter-selector select:focus {
+    outline: none;
+    border-color: #5c3e2e;
+    box-shadow: 0 0 5px rgba(92, 62, 46, 0.3);
+}
+
+/* Reader Area */
+.reader-area {
+    flex: 1;
+    overflow-y: auto;
+    padding: 30px 25px;
+    background: var(--bg-color);
+}
+
+.bible-text {
+    line-height: 1.8;
+    font-size: 32px;
+    color: var(--text-color);
+    text-align: justify;
+}
+
+.bible-text p {
+    margin-bottom: 1em;
+    text-indent: 2em;
+}
+
+.bible-text p:first-child {
+    text-indent: 0;
+}
+
+.bible-text .verse {
+    font-weight: bold;
+    color: #5c3e2e;
+}
+
+.bible-text .verse-number {
+    font-size: 12px;
+    color: #8b7355;
+    vertical-align: super;
+    margin-right: 3px;
+}
+
+.placeholder {
+    text-align: center;
+    color: rgba(0,0,0,0.45);
+    font-style: italic;
+    padding: 40px 20px;
+}
+
+/* TOC search */
+.toc-search {
+    padding: 6px 20px;
+    border-bottom: 1px solid #e6e0d6;
+}
+.toc-search input {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 1px solid #cfc6b9;
+    font-size: 15px;
+}
+.toc-search input:focus {
+    outline: none;
+    border-color: #8b7355;
+    box-shadow: 0 0 6px rgba(139,115,85,0.18);
+}
+
+/* Reader search */
+.reader-search input {
+    width: 100%;
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: 1px solid #cfc6b9;
+    font-size: 15px;
+}
+.reader-search input:focus {
+    outline: none;
+    border-color: #8b7355;
+    box-shadow: 0 0 6px rgba(139,115,85,0.12);
+}
+#search-results { display: none; padding: 8px 24px 0 24px; }
+#search-results ul { list-style: none; padding: 0; margin: 0; }
+#search-results li { margin: 8px 0; }
+#search-results a { color: #5c3e2e; text-decoration: none; font-weight: 600; }
+#search-results a:hover { text-decoration: underline; }
+
+/* Scrollbar styling */
+.reader-area::-webkit-scrollbar {
+    width: 8px;
+}
+
+.reader-area::-webkit-scrollbar-track {
+    background: #e8dcc8;
+}
+
+.reader-area::-webkit-scrollbar-thumb {
+    background: #8b7355;
+    border-radius: 4px;
+}
+
+.reader-area::-webkit-scrollbar-thumb:hover {
+    background: #6b5344;
+}
+
+/* Footer */
+.footer {
+    background: #e8dcc8;
+    padding: 12px 20px;
+    text-align: center;
+    font-size: 12px;
+    color: #5c3e2e;
+    border-top: 1px solid #d4cfc8;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .container {
+        width: 100vw;
+        height: 100vh;
+        border-radius: 0;
+    }
+
+    .bible-text {
+        font-size: 15px;
+    }
+
+    .header h1 {
+        font-size: 24px;
+    }
+}
+
+/* Full page reader adjustments */
+body.fullpage .container {
+    width: 900px;
+    max-width: 95vw;
+    height: auto;
+    margin: 24px auto;
+    border-radius: 8px;
+}
+
+body.fullpage .reader-area { max-height: calc(100vh - 260px); }
+
+/* Controls */
+.chapter-selector {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+.chapter-selector .controls {
+    display: inline-flex;
+    gap: 8px;
+    margin-left: auto;
+    flex-wrap: wrap;
+}
+.chapter-selector .controls button {
+    background: #8b7355;
+    color: #faf8f3;
+    border: none;
+    padding: 8px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 14px;
+    min-width: 40px;
+    height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.chapter-selector .controls button:disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+
+/* Night mode */
+body.night {
+    background: linear-gradient(135deg, #1b1b1b 0%, #111 100%);
+    color: #ddd;
+}
+.night .container { background: #121212; box-shadow: none; }
+.night .header { background: #222; color: #fff; border-bottom-color: #111 }
+.night .chapter-selector { background: #181818; border-bottom-color: #222 }
+.night .chapter-selector select { background: #0f0f0f; color: #ddd; border-color: #444 }
+.night .bible-text { color: #e8e6e0 }
+.night .footer { background: #161616; color: #bbb }
